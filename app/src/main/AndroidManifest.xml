@@ -12,10 +12,15 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.PiggyBankShaker"
         tools:targetApi="31">
+        <service
+            android:name=".service.VibratorService"
+            android:enabled="true"
+            android:exported="false" />
+
         <activity
             android:name=".activity.PiggyBankActivity"
-            android:exported="true"
-            android:configChanges="orientation">
+            android:configChanges="orientation"
+            android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -24,12 +29,12 @@
         </activity>
         <activity
             android:name=".activity.SlotMachineActivity"
-            android:exported="false"
-            android:configChanges="orientation" />
+            android:configChanges="orientation"
+            android:exported="false" />
         <activity
             android:name=".activity.BitcoinValueActivity"
-            android:exported="false"
-            android:configChanges="orientation" />
+            android:configChanges="orientation"
+            android:exported="false" />
     </application>
 
 </manifest>
