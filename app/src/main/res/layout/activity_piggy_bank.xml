@@ -57,8 +57,8 @@
                 app:srcCompat="@drawable/coin_bag_remvebg" />
 
             <TextView
-                android:id="@+id/coins"
-                android:layout_width="278dp"
+                android:id="@+id/piggyBank_coins"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_weight="1"
                 android:text="@string/textField_coins_defaultAmount"
@@ -80,8 +80,8 @@
                 app:srcCompat="@drawable/bitcoin_removebg" />
 
             <TextView
-                android:id="@+id/bitcoins"
-                android:layout_width="160dp"
+                android:id="@+id/bitcoinValue_bitcoins"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/textField_bitcoins_defaultAmount"
                 android:textColor="#2c88d9"

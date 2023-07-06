@@ -31,7 +31,7 @@
                 app:srcCompat="@drawable/bitcoin_removebg" />
 
             <TextView
-                android:id="@+id/bitcoins"
+                android:id="@+id/bitcoinValue_bitcoins"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="@string/textField_bitcoins_defaultAmount"
@@ -98,7 +98,7 @@
         app:layout_constraintVertical_bias="0.025" />
 
     <TextView
-        android:id="@+id/textView2"
+        android:id="@+id/bitcoinValue"
         android:layout_width="327dp"
         android:layout_height="29dp"
         android:text="@string/textView_valueOfBitcoinsInCurrency_defaultText"
