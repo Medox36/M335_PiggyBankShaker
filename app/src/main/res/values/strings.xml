@@ -1,9 +1,12 @@
 <resources>
-    <string name="app_name">PiggyBankshaker</string>
-    <string name="button_piggyBank_toSlotMachine_text">To Slot Machine</string>
+    <string name="app_name">PiggyBankShaker</string>
+    <string name="button_toSlotMachine_text">To Slot Machine</string>
+    <string name="button_toPiggyBank_text">To Piggy Bank</string>
     <string name="button_piggyBank_valueOfYourBitcoins_text">Value of your Bitcoins</string>
     <string name="textField_coins_defaultAmount">0</string>
     <string name="textField_bitcoins_defaultAmount">0.000000</string>
     <string name="button_slotMachine_spin_text">Spin</string>
     <string name="editText_slotMachine_coinsToBet_text">Number of Coins</string>
+    <string name="textView_equals_text">=</string>
+    <string name="textView_valueOfBitcoinsInCurrency_defaultText">Can\'t calculate</string>
 </resources>

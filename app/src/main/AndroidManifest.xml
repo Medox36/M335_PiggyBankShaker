@@ -24,6 +24,9 @@
         <activity
             android:name=".activity.SlotMachineActivity"
             android:exported="false" />
+        <activity
+            android:name=".activity.BitcoinValueActivity"
+            android:exported="false" />
     </application>
 
 </manifest>
