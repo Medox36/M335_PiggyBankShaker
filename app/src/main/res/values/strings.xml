@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">PiggyBankshaker</string>
+    <string name="button_piggyBank_toSlotMachine_text">To Slot Machine</string>
+    <string name="button_piggyBank_valueOfYourBitcoins_text">Value of your Bitcoins</string>
+    <string name="textField_coins_defaultAmount">0</string>
+    <string name="textField_bitcoins_defaultAmount">0.000000</string>
 </resources>
