@@ -19,13 +19,13 @@ import ch.giuntini.mobile.piggybankshaker.service.StockService;
 
 public class BitcoinValueActivity extends AppCompatActivity {
 
-    private DataManagerService dataManagerService;
-    private StockService stockService;
     private final ServiceConnection dataManagerConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
             DataManagerService.ServiceManagerBinder binder = (DataManagerService.ServiceManagerBinder) service;
-            dataManagerService = binder.getService();
+            DataManagerService dataManagerService = binder.getService();
+            dataManagerService.setTextViews(null, bitcoins);
+            spinnerEventListener.setDataManagerService(dataManagerService);
         }
 
         @Override
@@ -35,12 +35,16 @@ public class BitcoinValueActivity extends AppCompatActivity {
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
             StockService.StockServiceBinder binder = (StockService.StockServiceBinder) service;
-            stockService = binder.getService();
+            StockService stockService = binder.getService();
+            spinnerEventListener.setStockService(stockService);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {}
     };
+    private TextView bitcoins;
+    private SpinnerEventListener spinnerEventListener;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -58,23 +62,16 @@ public class BitcoinValueActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        TextView bitcoins = findViewById(R.id.bitcoinValue_bitcoins);
-        dataManagerService.setTextViews(null, bitcoins);
+        bitcoins = findViewById(R.id.slotMachine_bitcoins);
 
         TextView bitcoinValue = findViewById(R.id.bitcoinValue);
 
-        Spinner spinner = (Spinner) findViewById(R.id.currencies);
-        spinner.setOnItemSelectedListener(new SpinnerEventListener(bitcoinValue, stockService, dataManagerService));
-    }
+        spinnerEventListener = new SpinnerEventListener(bitcoinValue);
 
-    @Override
-    protected void onStart() {
-        super.onStart();
-        Intent intent = new Intent(this, DataManagerService.class);
-        bindService(intent, dataManagerConnection, Context.BIND_AUTO_CREATE);
+        bindToServices();
 
-        Intent intent2 = new Intent(this, StockService.class);
-        bindService(intent2, stockConnection, Context.BIND_AUTO_CREATE);
+        Spinner spinner = findViewById(R.id.currencies);
+        spinner.setOnItemSelectedListener(spinnerEventListener);
     }
 
     @Override
@@ -82,5 +79,13 @@ public class BitcoinValueActivity extends AppCompatActivity {
         super.onDestroy();
         unbindService(dataManagerConnection);
         unbindService(stockConnection);
+    }
+
+    private void bindToServices() {
+        Intent intent = new Intent(this, DataManagerService.class);
+        bindService(intent, dataManagerConnection, Context.BIND_AUTO_CREATE);
+
+        Intent intent2 = new Intent(this, StockService.class);
+        bindService(intent2, stockConnection, Context.BIND_AUTO_CREATE);
     }
 }

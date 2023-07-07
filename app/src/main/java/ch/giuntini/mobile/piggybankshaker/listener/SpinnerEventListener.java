@@ -10,13 +10,11 @@ import ch.giuntini.mobile.piggybankshaker.service.StockService;
 public class SpinnerEventListener implements AdapterView.OnItemSelectedListener {
 
     private final TextView bitcoinValue;
-    private final StockService stockService;
-    private final DataManagerService dataManagerService;
+    private StockService stockService;
+    private DataManagerService dataManagerService;
 
-    public SpinnerEventListener(TextView bitcoinValue, StockService stockService, DataManagerService dataManagerService) {
+    public SpinnerEventListener(TextView bitcoinValue) {
         this.bitcoinValue = bitcoinValue;
-        this.stockService = stockService;
-        this.dataManagerService = dataManagerService;
     }
 
     @Override
@@ -35,7 +33,6 @@ public class SpinnerEventListener implements AdapterView.OnItemSelectedListener 
                 setText(stockService.getValueFor("CHF", getBitcoinAmount()));
             }
         }
-
     }
 
     @Override
