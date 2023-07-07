@@ -16,6 +16,10 @@
         android:theme="@style/Theme.PiggyBankShaker"
         tools:targetApi="31">
         <service
+            android:name=".service.SlotMachineService"
+            android:enabled="true"
+            android:exported="false" />
+        <service
             android:name=".service.DataManagerService"
             android:enabled="true"
             android:exported="false" />
