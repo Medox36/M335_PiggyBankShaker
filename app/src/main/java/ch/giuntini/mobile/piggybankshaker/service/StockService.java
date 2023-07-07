@@ -24,13 +24,18 @@ import java.util.concurrent.TimeoutException;
 
 public class StockService extends Service {
     private final IBinder binder = new StockService.StockServiceBinder();
-    private static final String API_URL = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur,chf&precision=2";
+    private static final String API_URL = "https://api.coingecko.com/api/v3/simple/price?ids=bitcoin&vs_currencies=usd,eur,chf&precision=4";
     private RequestQueue requestQueue;
     private LocalDateTime lastUpdate = LocalDateTime.now().minusMinutes(5);
     private double usdPrice;
     private double eurPrice;
     private double chfPrice;
-    private final DecimalFormat df = new DecimalFormat();
+
+    // two digit precision
+    private final DecimalFormat df2 = new DecimalFormat();
+    // four digit precision
+
+    private final DecimalFormat df4 = new DecimalFormat();
     private SharedPreferences.Editor editor;
     public static final String INVALID_TEXT = "Can't calculate";
 
@@ -50,7 +55,8 @@ public class StockService extends Service {
             fetchBitcoinPrices();
         }
 
-        df.setMaximumFractionDigits(2);
+        df2.setMaximumFractionDigits(2);
+        df4.setMaximumFractionDigits(4);
     }
 
     @Override
@@ -105,7 +111,7 @@ public class StockService extends Service {
         double stockValue = getPriceForCurrency(currency);
 
         if (stockValue == -1.0 || bitcoin == -1.0) return INVALID_TEXT;
-        return df.format(bitcoin * stockValue);
+        return df2.format(bitcoin * stockValue);
     }
 
     public String getBitcoinsForUSD(double USDs) {
@@ -114,7 +120,7 @@ public class StockService extends Service {
         double stockValue = getPriceForCurrency("USD");
 
         if (stockValue == -1.0 || USDs == -1.0) return INVALID_TEXT;
-        return df.format(USDs / stockValue);
+        return df4.format(USDs / stockValue);
     }
 
     private void updateStockPrices() {
