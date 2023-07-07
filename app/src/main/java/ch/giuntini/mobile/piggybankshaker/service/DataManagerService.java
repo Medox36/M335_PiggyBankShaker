@@ -34,10 +34,12 @@ public class DataManagerService extends Service {
     public void onCreate() {
         super.onCreate();
         SharedPreferences preferences = getSharedPreferences("data", MODE_PRIVATE);
-        editor = preferences.edit();
+        if (preferences != null) {
+            editor = preferences.edit();
 
-        coins = preferences.getInt("coins", 0);
-        bitcoins = preferences.getFloat("bitcoins", 0.0f);
+            coins = preferences.getInt("coins", 0);
+            bitcoins = preferences.getFloat("bitcoins", 0.0f);
+        }
     }
 
     @Override
@@ -47,13 +49,13 @@ public class DataManagerService extends Service {
 
     @Override
     public void onDestroy() {
-        editor.commit();
+        if (editor != null) editor.commit();
         super.onDestroy();
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        editor.commit();
+        if (editor != null) editor.commit();
         return super.onUnbind(intent);
     }
 
@@ -63,24 +65,30 @@ public class DataManagerService extends Service {
 
     public void incrementCoinsBy(int coins) {
         this.coins += coins;
-        editor.putInt("coins", this.coins);
-        editor.commit();
+        if (editor != null) {
+            editor.putInt("coins", this.coins);
+            editor.commit();
+        }
 
         updateCoinsView();
     }
 
     public void decrementCoinsBy(int coins) {
         this.coins -= coins;
-        editor.putInt("coins", this.coins);
-        editor.commit();
+        if (editor != null) {
+            editor.putInt("coins", this.coins);
+            editor.commit();
+        }
 
         updateCoinsView();
     }
 
     public void incrementBitcoinsBy(float bitcoins) {
         this.bitcoins += bitcoins;
-        editor.putFloat("bitcoins", this.bitcoins);
-        editor.commit();
+        if (editor != null) {
+            editor.putFloat("bitcoins", this.bitcoins);
+            editor.commit();
+        }
 
         updateBitcoinsView();
     }
