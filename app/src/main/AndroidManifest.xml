@@ -35,7 +35,8 @@
         <activity
             android:name=".activity.PiggyBankActivity"
             android:configChanges="orientation"
-            android:exported="true">
+            android:exported="true"
+            android:noHistory="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -45,11 +46,13 @@
         <activity
             android:name=".activity.SlotMachineActivity"
             android:configChanges="orientation"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
         <activity
             android:name=".activity.BitcoinValueActivity"
             android:configChanges="orientation"
-            android:exported="false" />
+            android:exported="false"
+            android:noHistory="true"/>
     </application>
 
 </manifest>
