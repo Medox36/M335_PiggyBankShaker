@@ -22,15 +22,15 @@ public class SpinnerEventListener implements AdapterView.OnItemSelectedListener 
         String selectedItem = (String) adapterView.getItemAtPosition(i);
         switch (selectedItem) {
             case "USD": {
-                setText(stockService.getValueFor("USD", getBitcoinAmount()));
+                setText(getValueFor("USD", getBitcoinAmount()));
                 break;
             }
             case "EUR": {
-                setText(stockService.getValueFor("EUR", getBitcoinAmount()));
+                setText(getValueFor("EUR", getBitcoinAmount()));
                 break;
             }
             case "CHF": {
-                setText(stockService.getValueFor("CHF", getBitcoinAmount()));
+                setText(getValueFor("CHF", getBitcoinAmount()));
             }
         }
     }
@@ -46,5 +46,17 @@ public class SpinnerEventListener implements AdapterView.OnItemSelectedListener 
 
     private double getBitcoinAmount() {
         return dataManagerService != null ? Double.parseDouble(dataManagerService.getBitcoinsString()) : -1.0;
+    }
+
+    private String getValueFor(String currency, double amount) {
+        return stockService != null ? stockService.getValueFor(currency, amount) : StockService.INVALID_TEXT;
+    }
+
+    public void setDataManagerService(DataManagerService dataManagerService) {
+        this.dataManagerService = dataManagerService;
+    }
+
+    public void setStockService(StockService stockService) {
+        this.stockService = stockService;
     }
 }
