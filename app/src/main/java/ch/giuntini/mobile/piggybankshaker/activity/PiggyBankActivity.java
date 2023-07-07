@@ -21,13 +21,13 @@ import ch.giuntini.mobile.piggybankshaker.service.VibratorService;
 public class PiggyBankActivity extends AppCompatActivity {
 
     private SensorManager mSensorManager;
-    private VibratorService vibratorService;
-    private DataManagerService dataManagerService;
     private final ServiceConnection dataManagerConnection = new ServiceConnection() {
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
             DataManagerService.ServiceManagerBinder binder = (DataManagerService.ServiceManagerBinder) service;
-            dataManagerService = binder.getService();
+            DataManagerService dataManagerService = binder.getService();
+            dataManagerService.setTextViews(coins, bitcoins);
+            shakeListener.setDataManagerService(dataManagerService);
         }
 
         @Override
@@ -37,21 +37,24 @@ public class PiggyBankActivity extends AppCompatActivity {
         @Override
         public void onServiceConnected(ComponentName className, IBinder service) {
             VibratorService.VibratorServiceBinder binder = (VibratorService.VibratorServiceBinder) service;
-            vibratorService = binder.getService();
+            VibratorService vibratorService = binder.getService();
+            shakeListener.setVibratorService(vibratorService);
         }
 
         @Override
         public void onServiceDisconnected(ComponentName componentName) {}
     };
     private ShakeListener shakeListener;
+    private TextView coins;
+    private TextView bitcoins;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_piggy_bank);
 
-        TextView coins = findViewById(R.id.piggyBank_coins);
-        TextView bitcoins = findViewById(R.id.bitcoinValue_bitcoins);
+        coins = findViewById(R.id.slotMachine_coins);
+        bitcoins = findViewById(R.id.slotMachine_bitcoins);
 
         Button toSlotMachine = findViewById(R.id.piggyBank_toSlotMachine);
         toSlotMachine.setOnClickListener(view -> {
@@ -64,22 +67,22 @@ public class PiggyBankActivity extends AppCompatActivity {
             startActivity(intent);
         });
 
-        dataManagerService.setTextViews(coins, bitcoins);
+        bindToServices();
 
+        shakeListener = new ShakeListener();
         mSensorManager = (SensorManager) getSystemService(Context.SENSOR_SERVICE);
-        shakeListener = new ShakeListener(dataManagerService, vibratorService);
-
-        mSensorManager.registerListener(shakeListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
     protected void onStart() {
         super.onStart();
-        Intent intent = new Intent(this, DataManagerService.class);
-        bindService(intent, dataManagerConnection, Context.BIND_AUTO_CREATE);
+        mSensorManager.registerListener(shakeListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
+    }
 
-        Intent intent2 = new Intent(this, VibratorService.class);
-        bindService(intent2, vibratorConnection, Context.BIND_AUTO_CREATE);
+    @Override
+    protected void onRestart() {
+        super.onRestart();
+        mSensorManager.registerListener(shakeListener, mSensorManager.getDefaultSensor(Sensor.TYPE_ACCELEROMETER), SensorManager.SENSOR_DELAY_NORMAL);
     }
 
     @Override
@@ -97,7 +100,16 @@ public class PiggyBankActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
+        mSensorManager.unregisterListener(shakeListener);
         unbindService(dataManagerConnection);
         unbindService(vibratorConnection);
+    }
+
+    private void bindToServices() {
+        Intent intent = new Intent(this, DataManagerService.class);
+        bindService(intent, dataManagerConnection, Context.BIND_AUTO_CREATE);
+
+        Intent intent2 = new Intent(this, VibratorService.class);
+        bindService(intent2, vibratorConnection, Context.BIND_AUTO_CREATE);
     }
 }

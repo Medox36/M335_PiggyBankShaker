@@ -13,18 +13,16 @@ public class ShakeListener implements SensorEventListener {
     private float acceleration;
     private float currentAcceleration;
     private float lastAcceleration;
-    private final VibratorService vibratorService;
-    private final DataManagerService dataManagerService;
+    private VibratorService vibratorService;
+    private DataManagerService dataManagerService;
     private long lastCoin = System.currentTimeMillis();
     private static final long INTERVAL = 500;
 
 
-    public ShakeListener(DataManagerService dataManagerService, VibratorService vibratorService) {
+    public ShakeListener() {
         acceleration = 0;
         currentAcceleration = SensorManager.GRAVITY_EARTH;
         lastAcceleration = SensorManager.GRAVITY_EARTH;
-        this.dataManagerService = dataManagerService;
-        this.vibratorService = vibratorService;
     }
 
     @Override
@@ -34,7 +32,7 @@ public class ShakeListener implements SensorEventListener {
         float z = event.values[2];
 
         lastAcceleration = currentAcceleration;
-        currentAcceleration = (float) Math.sqrt((double) (x * x + y * y + z * z));
+        currentAcceleration = (float) Math.sqrt(x * x + y * y + z * z);
         float delta = currentAcceleration - lastAcceleration;
         acceleration = acceleration * 0.9f + delta;
         if (acceleration > 1) {
@@ -53,5 +51,13 @@ public class ShakeListener implements SensorEventListener {
 
     @Override
     public void onAccuracyChanged(Sensor sensor, int accuracy) {
+    }
+
+    public void setDataManagerService(DataManagerService dataManagerService) {
+        this.dataManagerService = dataManagerService;
+    }
+
+    public void setVibratorService(VibratorService vibratorService) {
+        this.vibratorService = vibratorService;
     }
 }
