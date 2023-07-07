@@ -12,7 +12,7 @@ public class DataManagerService extends Service {
 
     private final IBinder binder = new ServiceManagerBinder();
     private int coins;
-    private double bitcoins;
+    private float bitcoins;
     private final DecimalFormat df = new DecimalFormat();
     private SharedPreferences.Editor editor;
 
@@ -37,7 +37,7 @@ public class DataManagerService extends Service {
         editor = preferences.edit();
 
         coins = preferences.getInt("coins", 0);
-        bitcoins = Double.parseDouble(preferences.getString("bitcoins", "0.0"));
+        bitcoins = preferences.getFloat("bitcoins", 0.0f);
     }
 
     @Override
@@ -79,7 +79,7 @@ public class DataManagerService extends Service {
 
     public void incrementBitcoinsBy(float bitcoins) {
         this.bitcoins += bitcoins;
-        editor.putString("bitcoins", String.valueOf(this.bitcoins));
+        editor.putFloat("bitcoins", this.bitcoins);
         editor.commit();
 
         updateBitcoinsView();
