@@ -55,6 +55,7 @@
                 android:id="@+id/piggyBank_coinBag"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:contentDescription="@string/coinBag_contentDescription"
                 app:srcCompat="@drawable/coin_bag_remvebg" />
 
             <TextView
@@ -78,6 +79,7 @@
                 android:id="@+id/piggyBank_bitcoinLogo"
                 android:layout_width="60dp"
                 android:layout_height="60dp"
+                android:contentDescription="@string/bitcoin_logo_contentDescription"
                 app:srcCompat="@drawable/bitcoin_removebg" />
 
             <TextView
@@ -110,6 +112,7 @@
         android:id="@+id/slotMachine"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
+        android:contentDescription="@string/slotMachine_contentDescription"
         android:scaleX="0.8"
         android:scaleY="0.8"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,36 +126,39 @@
         android:id="@+id/symbol1"
         android:layout_width="49dp"
         android:layout_height="103dp"
+        android:background="@drawable/symbol_empty"
+        android:contentDescription="@string/slotMachine_symbol_contentDescription"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.237"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375"
-        app:srcCompat="@drawable/symbol_empty" />
+        app:layout_constraintVertical_bias="0.375" />
 
     <ImageView
         android:id="@+id/symbol3"
         android:layout_width="49dp"
         android:layout_height="103dp"
+        android:background="@drawable/symbol_empty"
+        android:contentDescription="@string/slotMachine_symbol_contentDescription"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.566"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375"
-        app:srcCompat="@drawable/symbol_empty" />
+        app:layout_constraintVertical_bias="0.375" />
 
     <ImageView
         android:id="@+id/symbol2"
         android:layout_width="49dp"
         android:layout_height="103dp"
+        android:background="@drawable/symbol_empty"
+        android:contentDescription="@string/slotMachine_symbol_contentDescription"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.403"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.375"
-        app:srcCompat="@drawable/symbol_empty" />
+        app:layout_constraintVertical_bias="0.375" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

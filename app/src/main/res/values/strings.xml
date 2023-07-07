@@ -9,4 +9,9 @@
     <string name="editText_slotMachine_coinsToBet_text">Number of Coins</string>
     <string name="textView_equals_text">=</string>
     <string name="textView_valueOfBitcoinsInCurrency_defaultText">Can\'t calculate</string>
+    <string name="bitcoin_logo_contentDescription">Bitcoin Logo</string>
+    <string name="coinBag_contentDescription">Coin Bag</string>
+    <string name="piggy_contentDescription">Piggy Bank</string>
+    <string name="slotMachine_contentDescription">slot Machine</string>
+    <string name="slotMachine_symbol_contentDescription">Symbol of slot Machine</string>
 </resources>

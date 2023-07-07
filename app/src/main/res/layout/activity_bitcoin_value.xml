@@ -24,11 +24,12 @@
             android:gravity="center_vertical"
             android:orientation="horizontal">
 
-            <ImageView
-                android:id="@+id/piggyBank_bitcoinLogo"
-                android:layout_width="60dp"
-                android:layout_height="60dp"
-                app:srcCompat="@drawable/bitcoin_removebg" />
+        <ImageView
+            android:id="@+id/piggyBank_bitcoinLogo"
+            android:layout_width="60dp"
+            android:layout_height="60dp"
+            android:contentDescription="@string/bitcoin_logo_contentDescription"
+            app:srcCompat="@drawable/bitcoin_removebg" />
 
             <TextView
                 android:id="@+id/bitcoinValue_bitcoins"
@@ -82,7 +83,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.936" />
+        app:layout_constraintVertical_bias="0.937" />
 
     <Spinner
         android:id="@+id/currencies"
