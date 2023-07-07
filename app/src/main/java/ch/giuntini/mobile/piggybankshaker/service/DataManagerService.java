@@ -37,7 +37,7 @@ public class DataManagerService extends Service {
         editor = preferences.edit();
 
         coins = preferences.getInt("coins", 0);
-        bitcoins = preferences.getFloat("bitcoins", 0.000000f);
+        bitcoins = Double.parseDouble(preferences.getString("bitcoins", "0.0"));
     }
 
     @Override
@@ -47,13 +47,13 @@ public class DataManagerService extends Service {
 
     @Override
     public void onDestroy() {
-        editor.apply();
+        editor.commit();
         super.onDestroy();
     }
 
     @Override
     public boolean onUnbind(Intent intent) {
-        editor.apply();
+        editor.commit();
         return super.onUnbind(intent);
     }
 
@@ -63,16 +63,24 @@ public class DataManagerService extends Service {
 
     public void incrementCoinsBy(int coins) {
         this.coins += coins;
-        editor.putInt("coins", coins);
-        editor.apply();
+        editor.putInt("coins", this.coins);
+        editor.commit();
+
+        updateCoinsView();
+    }
+
+    public void decrementCoinsBy(int coins) {
+        this.coins -= coins;
+        editor.putInt("coins", this.coins);
+        editor.commit();
 
         updateCoinsView();
     }
 
     public void incrementBitcoinsBy(float bitcoins) {
         this.bitcoins += bitcoins;
-        editor.putInt("bitcoins", coins);
-        editor.apply();
+        editor.putString("bitcoins", String.valueOf(this.bitcoins));
+        editor.commit();
 
         updateBitcoinsView();
     }
@@ -102,10 +110,10 @@ public class DataManagerService extends Service {
     }
 
     private void updateCoinsView() {
-        if (coinsInView != null && coinsInView.isShown()) coinsInView.setText(getCoinsString());
+        if (coinsInView != null) coinsInView.setText(getCoinsString());
     }
 
     private void updateBitcoinsView() {
-        if (bitcoinsInView != null && bitcoinsInView.isShown()) bitcoinsInView.setText(getBitcoinsString());
+        if (bitcoinsInView != null) bitcoinsInView.setText(getBitcoinsString());
     }
 }
