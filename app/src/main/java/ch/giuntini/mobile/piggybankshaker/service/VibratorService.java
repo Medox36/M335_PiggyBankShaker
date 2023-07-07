@@ -10,8 +10,14 @@ import android.os.Vibrator;
 
 public class VibratorService extends Service {
     private final IBinder binder = new VibratorService.VibratorServiceBinder();
-    final Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    private Vibrator vibrator;
 
+
+    @Override
+    public void onCreate() {
+        super.onCreate();
+        vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+    }
 
     @Override
     public IBinder onBind(Intent intent) {
@@ -22,6 +28,12 @@ public class VibratorService extends Service {
         public VibratorService getService() {
             return VibratorService.this;
         }
+    }
+
+    @Override
+    public boolean onUnbind(Intent intent) {
+        vibrator.cancel();
+        return super.onUnbind(intent);
     }
 
     public void vibrateShort() {
