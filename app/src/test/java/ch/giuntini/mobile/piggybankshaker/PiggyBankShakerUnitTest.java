@@ -13,7 +13,7 @@ import ch.giuntini.mobile.piggybankshaker.service.SlotMachineService;
  *
  * @see <a href="http://d.android.com/tools/testing">Testing documentation</a>
  */
-public class ExampleUnitTest {
+public class PiggyBankShakerUnitTest {
 
     private DataManagerService dataManagerService;
     private SlotMachineService slotMachineService;
