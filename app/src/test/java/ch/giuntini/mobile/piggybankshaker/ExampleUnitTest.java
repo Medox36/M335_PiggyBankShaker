@@ -25,11 +25,6 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void addition_isCorrect() {
-        assertEquals(4, 2 + 2);
-    }
-
-    @Test
     public void savingNumberOfCoinsAndBitcoins() {
         dataManagerService.incrementCoinsBy(48);
         dataManagerService.incrementBitcoinsBy(8.4775f);
@@ -43,26 +38,26 @@ public class ExampleUnitTest {
         Symbol[] spin1 = slotMachineService.spin();
         Symbol[] spin2 = slotMachineService.spin();
 
-        int cnt = 0;
-        for (int i = 0; i < 4; i++) {
-            if (spin1[i] == spin2[i]) {
-                cnt++;
-            }
-        }
+        int cnt = compare(spin1, spin2);
 
         // should the symbols be the same by any chance
         // we re-spin and check if they still are the same
         if (cnt == 3) {
             spin1 = slotMachineService.spin();
             spin2 = slotMachineService.spin();
-            cnt = 0;
-            for (int i = 0; i < 4; i++) {
-                if (spin1[i] == spin2[i]) {
-                    cnt++;
-                }
-            }
+            cnt = compare(spin1, spin2);
         }
 
         assertNotEquals(cnt, 3);
+    }
+
+    private int compare(Symbol[] symbols1, Symbol[] symbols2) {
+        int cnt = 0;
+        for (int i = 0; i < 3; i++) {
+            if (symbols1[i] == symbols2[i]) {
+                cnt++;
+            }
+        }
+        return cnt;
     }
 }
