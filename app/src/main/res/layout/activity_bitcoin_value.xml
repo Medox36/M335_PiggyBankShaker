@@ -8,21 +8,16 @@
     tools:context=".activity.BitcoinValueActivity" >
 
     <LinearLayout
-        android:id="@+id/linearLayout"
-        android:layout_width="333dp"
-        android:layout_height="78dp"
-        android:orientation="vertical"
+        android:layout_width="342dp"
+        android:layout_height="77dp"
+        android:gravity="center_vertical"
+        android:orientation="horizontal"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.492"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.101">
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="73dp"
-            android:gravity="center_vertical"
-            android:orientation="horizontal">
+        app:layout_constraintVertical_bias="0.07">
 
         <ImageView
             android:id="@+id/piggyBank_bitcoinLogo"
@@ -31,33 +26,30 @@
             android:contentDescription="@string/bitcoin_logo_contentDescription"
             app:srcCompat="@drawable/bitcoin_removebg" />
 
-            <TextView
-                android:id="@+id/bitcoinValue_bitcoins"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="@string/textField_bitcoins_defaultAmount"
-                android:textAlignment="center"
-                android:textColor="#2c88d9"
-                android:textSize="34sp"
-                android:textStyle="bold" />
+        <TextView
+            android:id="@+id/slotMachine_bitcoins"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/textField_bitcoins_defaultAmount"
+            android:textAlignment="center"
+            android:textColor="#2c88d9"
+            android:textSize="34sp"
+            android:textStyle="bold" />
 
-        </LinearLayout>
     </LinearLayout>
 
     <TextView
         android:id="@+id/textView"
         android:layout_width="55dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="508dp"
         android:text="@string/textView_equals_text"
         android:textAlignment="center"
         android:textSize="60sp"
         android:textStyle="bold"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.491"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintStart_toStartOf="parent" />
 
     <Button
         android:id="@+id/bitcoinValue_toPiggyBank"
